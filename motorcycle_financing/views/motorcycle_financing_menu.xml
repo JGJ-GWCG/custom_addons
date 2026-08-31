@@ -1,12 +1,13 @@
 <odoo>
     <menuitem id="menu_motorcycle_financing_root"
-              name="Motorcycle Financing">
+              name="Financing"
+              web_icon="motorcycle_financing,static/description/icon.png">
 
         <menuitem id="menu_loan"
-                  name="Loans">
+                  name="Motorcycle Financing">
 
             <menuitem id="menu_loan_applications"
-                      name="Applications"
+                      name="Loan Applications"
                       action="loan_record"/>
 
         </menuitem>
