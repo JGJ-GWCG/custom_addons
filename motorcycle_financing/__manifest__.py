@@ -6,10 +6,10 @@
     'license': 'OPL-1',
 	'category': 'Kawiil/Custom Modules',
 	'author': 'JGJ-GWCG',
-	'website': 'https://github.com/odoo-trainings/kawiil_base.git',
+	'website': 'https://github.com/JGJ-GWCG/custom_addons.git',
 	'version': '18.0.0.0.1',
 	'depends': [],
 	'data': [],
 	'demo': [],
-	'application': 'True',
+	'application': True,
 }
