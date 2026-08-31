@@ -8,11 +8,19 @@
 	'author': 'JGJ-GWCG',
 	'website': 'https://github.com/JGJ-GWCG/custom_addons.git',
 	'version': '19.0.0.0.1',
-	'depends': [],
-	'data': [],
+	'depends': [base],
+    'data': [
+        #SECURITY
+        'security/ir.model.access.csv',
+        #VIEWS
+        'views/loan_application_views.xml',
+        #MENUS
+        'views/motorcycle_financing_menu.xml'
+	],
 	'demo': [
         'data/loan_demo.xml',
           ],
+	
 	'application': True,
     'installable': True,
 }
