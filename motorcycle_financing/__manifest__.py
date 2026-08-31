@@ -8,7 +8,7 @@
 	'author': 'JGJ-GWCG',
 	'website': 'https://github.com/JGJ-GWCG/custom_addons.git',
 	'version': '19.0.0.0.1',
-	'depends': [base],
+	'depends': ['base'],
     'data': [
         #SECURITY
         'security/ir.model.access.csv',
