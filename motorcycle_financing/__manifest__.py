@@ -10,7 +10,9 @@
 	'version': '19.0.0.0.1',
 	'depends': [],
 	'data': [],
-	'demo': [],
+	'demo': [
+        'data/loan_demo.xml',
+          ],
 	'application': True,
     'installable': True,
 }
