@@ -4,7 +4,7 @@
     'summary': 'Streamlines the loan application process for dealerships.',
 	'description': '',
     'license': 'OPL-1',
-	'category': 'Kawiil/Custom Modules',
+	'category': 'Kawiil',
 	'author': 'JGJ-GWCG',
 	'website': 'https://github.com/JGJ-GWCG/custom_addons.git',
 	'version': '19.0.0.0.1',
