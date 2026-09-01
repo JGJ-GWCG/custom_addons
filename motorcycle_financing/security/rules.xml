@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Por qué: Financing User no debe poder modificar ni eliminar préstamos
+        ya firmados (state = 'signed'). Solo restringimos write/unlink, no
+        read/create, porque el requerimiento solo habla de "modify or delete".
+        No se crea una regla para Financing Admin: en Odoo, un grupo sin
+        ir.rule asociada para un modelo queda sin restricción, así que Admin
+        conserva acceso total (CRUD) sobre préstamos firmados por defecto.
+    -->
+    <record id="rule_loan_application_user_no_edit_signed" model="ir.rule">
+        <field name="name">Financing User: no editar/eliminar préstamos firmados</field>
+        <field name="model_id" ref="model_loan_application"/>
+        <field name="groups" eval="[(4, ref('group_financing_user'))]"/>
+        <field name="domain_force">[('state','!=','signed')]</field>
+        <field name="perm_read">0</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">0</field>
+        <field name="perm_unlink">1</field>
+    </record>
+</odoo>
