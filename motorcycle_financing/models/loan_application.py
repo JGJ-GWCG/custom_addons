@@ -17,3 +17,21 @@ class LoanModel(models.Model):
     rejection_reason = fields.Text( string = 'Rejection Reason', copy=False)
     state = fields.Selection (string = 'Status', selection=[('draft', 'Draft'), ('sent', 'Sent'), ('review', 'Credit Check'), ('approved', 'Approved'), ('rejected', 'Rejected'), ('signed', 'Signed'), ('cancel', 'Canceled')], default='draft', copy = False)
     notes = fields.Html (string = "Notes", copy = False)
+
+    def action_send(self):
+        self.write({'state': 'sent', 'date_application': fields.Date.today()})
+
+    def action_review(self):
+        self.write({'state': 'review'})
+
+    def action_approve(self):
+        self.write({'state': 'approved', 'date_approval': fields.Date.today()})
+
+    def action_reject(self):
+        self.write({'state': 'rejected', 'date_rejection': fields.Date.today()})
+
+    def action_sign(self):
+        self.write({'state': 'signed', 'date_signed': fields.Datetime.now()})
+
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
