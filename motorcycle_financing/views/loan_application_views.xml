@@ -25,6 +25,20 @@
                         <field name="interest_rate"/>
                         <field name="loan_term"/>
                     </group>
+                    <group>
+                        <field name="date_application"/>
+                        <field name="date_approval"/>
+                        <field name="date_rejection"/>
+                        <field name="date_signed"/>
+                    </group>
+                    <notebook>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                        <page string="Rejection Details" name="rejection_details" invisible="state != 'rejected'">
+                            <field name="rejection_reason"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
