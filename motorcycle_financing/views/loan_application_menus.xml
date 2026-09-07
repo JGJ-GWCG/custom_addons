@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Este archivo NO toca tu menu.xml existente: solo agrega registros
+        nuevos que cuelgan de "menu_loan" (el id externo de "Motorcycle
+        Financing" que ya tienes), para no arriesgar duplicar el menú raíz.
+    -->
+
+    <!-- Documentos: operación diaria, mismo nivel que "Loan Applications" -->
+    <menuitem id="menu_loan_application_documents"
+              name="Documents"
+              parent="menu_loan"
+              action="loan_application_document_action"
+              sequence="20"/>
+
+    <!--
+        Configuración: catálogos maestros (Tipos de Documento, Tags).
+        Restringido a Financing Admin porque, según tu propio
+        ir.model.access.csv, Financing User solo tiene permiso de LECTURA
+        sobre estos dos modelos (no puede crear/editar tipos ni tags) — el
+        usuario normal los selecciona desde el formulario de la aplicación
+        o del documento, no necesita una pantalla de administración propia.
+        (Esto asume que arreglas el bug de ids duplicados que te señalé
+        arriba; si group_financing_admin se queda sin una regla de acceso
+        real para estos modelos, tampoco va a poder ver nada aquí.)
+    -->
+    <menuitem id="menu_loan_configuration"
+              name="Configuration"
+              parent="menu_loan"
+              groups="group_financing_admin"
+              sequence="100"/>
+
+    <menuitem id="menu_loan_application_document_types"
+              name="Document Types"
+              parent="menu_loan_configuration"
+              action="loan_application_document_type_action"
+              sequence="10"/>
+
+    <menuitem id="menu_loan_application_tags"
+              name="Tags"
+              parent="menu_loan_configuration"
+              action="loan_application_tag_action"
+              sequence="20"/>
+</odoo>

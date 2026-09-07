@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="loan_application_document_list_view" model="ir.ui.view">
+        <field name="name">loan.application.document.list</field>
+        <field name="model">loan.application.document</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'approved'" decoration-danger="state == 'rejected'">
+                <field name="name"/>
+                <field name="application_id"/>
+                <field name="type_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="loan_application_document_form_view" model="ir.ui.view">
+        <field name="name">loan.application.document.form</field>
+        <field name="model">loan.application.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!--
+                        Todavía no hay métodos de negocio definidos para
+                        aprobar/rechazar un documento (a diferencia de
+                        loan.application, que sí tiene botones con lógica).
+                        Por ahora el statusbar permite cambiar el estado
+                        manualmente; si el cliente pide un flujo de revisión
+                        con validaciones, ahí sí se agregan botones tipo
+                        action_approve/action_reject como en loan.application.
+                    -->
+                    <field name="state" widget="statusbar" statusbar_visible="new,approved,rejected"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Application Info">
+                            <field name="application_id"/>
+                            <field name="type_id"/>
+                        </group>
+                        <group string="File">
+                            <!--
+                                filename= le dice al widget dónde guardar/leer
+                                el nombre original del archivo al subir/descargar.
+                            -->
+                            <field name="attachment" filename="attachment_filename"/>
+                            <field name="attachment_filename" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="loan_application_document_search_view" model="ir.ui.view">
+        <field name="name">loan.application.document.search</field>
+        <field name="model">loan.application.document</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="application_id"/>
+                <field name="type_id"/>
+                <filter name="filter_new" string="New" domain="[('state','=','new')]"/>
+                <filter name="filter_approved" string="Approved" domain="[('state','=','approved')]"/>
+                <filter name="filter_rejected" string="Rejected" domain="[('state','=','rejected')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_application" string="Application" context="{'group_by':'application_id'}"/>
+                    <filter name="group_by_type" string="Document Type" context="{'group_by':'type_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="loan_application_document_action" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">loan.application.document</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

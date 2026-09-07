@@ -17,6 +17,13 @@ class LoanModel(models.Model):
     rejection_reason = fields.Text( string = 'Rejection Reason', copy=False)
     state = fields.Selection (string = 'Status', selection=[('draft', 'Draft'), ('sent', 'Sent'), ('review', 'Credit Check'), ('approved', 'Approved'), ('rejected', 'Rejected'), ('signed', 'Signed'), ('cancel', 'Canceled')], default='draft', copy = False)
     notes = fields.Html (string = "Notes", copy = False)
+    partner_id = fields.Many2one (string = "Customer", required=True, comodel_name='res.partner')
+    sale_order_id = fields.Many2one (string = "Related Sale Order", required=True, comodel_name='sale.order')
+    user_id = fields.Many2one (string = "Salesperson", required= True, comodel_name = 'res.users')
+    product_template_id = fields.Many2one (string = "Product", required = True, comodel_name = 'product.template')
+    document_ids = fields.One2many(string = "Documents", comodel_name='loan.application.document', inverse_name='application_id')
+    tag_ids = fields.Many2many(string = "Tags", comodel_name='loan.application.tag')
+
 
     def action_send(self):
         self.write({'state': 'sent', 'date_application': fields.Date.today()})
