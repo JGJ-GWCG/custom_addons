@@ -63,13 +63,6 @@
                 <field name="name"/>
                 <field name="application_id"/>
                 <field name="type_id"/>
-                <filter name="filter_new" string="New" domain="[('state','=','new')]"/>
-                <filter name="filter_approved" string="Approved" domain="[('state','=','approved')]"/>
-                <filter name="filter_rejected" string="Rejected" domain="[('state','=','rejected')]"/>
-                <group expand="0" string="Group By">
-                    <filter name="group_by_application" string="Application" context="{'group_by':'application_id'}"/>
-                    <filter name="group_by_type" string="Document Type" context="{'group_by':'type_id'}"/>
-                </group>
             </search>
         </field>
     </record>
