@@ -1,4 +1,3 @@
-Loan application views · XML
 <odoo>
     <record id="loan_record" model="ir.actions.act_window">
         <field name="name">Loan Applications</field>
