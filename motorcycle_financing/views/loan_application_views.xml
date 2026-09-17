@@ -1,4 +1,4 @@
-Loan application views · XML
+
 <odoo>
     <record id="loan_record" model="ir.actions.act_window">
         <field name="name">Loan Applications</field>
@@ -71,17 +71,6 @@ Loan application views · XML
                         </group>
                     </group>
                     <notebook>
-                        <!--
-                            Referencia "pelona" al one2many (sin arch propio
-                            aquí adentro): Odoo reutiliza automáticamente la
-                            vista loan_application_document_list_view para
-                            renderizarlo, incluyendo su editable="bottom" y
-                            el badge del estado. Así solo hay un lugar donde
-                            mantener esa definición en vez de duplicarla.
-                        -->
-                        <page string="Documentation" name="documentation">
-                            <field name="document_ids"/>
-                        </page>
                         <page string="Notes" name="notes">
                             <field name="notes"/>
                         </page>

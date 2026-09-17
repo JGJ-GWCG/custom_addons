@@ -1,58 +1,33 @@
-Loan application document views · XML
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="loan_application_document_list_view" model="ir.ui.view">
         <field name="name">loan.application.document.list</field>
         <field name="model">loan.application.document</field>
         <field name="arch" type="xml">
-            <!--
-                editable="bottom": esta misma vista se usa tanto para el menú
-                standalone de Documents como para la lista incrustada dentro
-                del notebook de loan.application (cuando se referencia el
-                campo document_ids sin arch propio, Odoo reutiliza esta
-                vista) — con editable="bottom" queda editable en ambos
-                lugares sin duplicar la definición dos veces.
-            -->
-            <list decoration-success="state == 'approved'" decoration-danger="state == 'rejected'" editable="bottom">
+            <list decoration-success="state == 'approved'" decoration-danger="state == 'rejected'">
                 <field name="name"/>
-                <!--
-                    application_id se deja declarado normal: cuando esta
-                    misma vista se reutiliza dentro del notebook de
-                    loan.application (como document_ids), Odoo oculta
-                    automáticamente la columna que apunta de vuelta al padre
-                    — es comportamiento nativo, no requiere ninguna condición
-                    manual. Sigue visible cuando se navega a Documents desde
-                    su propio menú, donde sí hace falta ver a qué aplicación
-                    pertenece cada documento.
-                -->
                 <field name="application_id"/>
-                <!--
-                    Un campo Binary en una lista ya se muestra nativamente
-                    como enlace de descarga + tamaño del archivo (el "8.69 Kb"
-                    de la captura) — no hace falta ningún widget especial,
-                    solo declarar el campo con su filename asociado.
-                -->
-                <field name="attachment" filename="attachment_filename"/>
-                <field name="attachment_filename" column_invisible="1"/>
                 <field name="type_id"/>
-                <!--
-                    widget="badge": el widget nativo de Odoo para mostrar un
-                    Selection como pastilla de color en vez de texto plano.
-                    Los decoration-* controlan qué color usa cada valor,
-                    igual que el patrón que ya usamos en el propio list de
-                    loan.application (decoration-success/decoration-danger).
-                -->
-                <field name="state" widget="badge" decoration-success="state == 'approved'" decoration-danger="state == 'rejected'" decoration-info="state == 'new'"/>
+                <field name="state"/>
             </list>
         </field>
     </record>
- 
+
     <record id="loan_application_document_form_view" model="ir.ui.view">
         <field name="name">loan.application.document.form</field>
         <field name="model">loan.application.document</field>
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <!--
+                        Todavía no hay métodos de negocio definidos para
+                        aprobar/rechazar un documento (a diferencia de
+                        loan.application, que sí tiene botones con lógica).
+                        Por ahora el statusbar permite cambiar el estado
+                        manualmente; si el cliente pide un flujo de revisión
+                        con validaciones, ahí sí se agregan botones tipo
+                        action_approve/action_reject como en loan.application.
+                    -->
                     <field name="state" widget="statusbar" statusbar_visible="new,approved,rejected"/>
                 </header>
                 <sheet>
@@ -67,6 +42,10 @@ Loan application document views · XML
                             <field name="type_id"/>
                         </group>
                         <group string="File">
+                            <!--
+                                filename= le dice al widget dónde guardar/leer
+                                el nombre original del archivo al subir/descargar.
+                            -->
                             <field name="attachment" filename="attachment_filename"/>
                             <field name="attachment_filename" invisible="1"/>
                         </group>
@@ -75,7 +54,7 @@ Loan application document views · XML
             </form>
         </field>
     </record>
- 
+
     <record id="loan_application_document_search_view" model="ir.ui.view">
         <field name="name">loan.application.document.search</field>
         <field name="model">loan.application.document</field>
@@ -87,11 +66,10 @@ Loan application document views · XML
             </search>
         </field>
     </record>
- 
+
     <record id="loan_application_document_action" model="ir.actions.act_window">
         <field name="name">Documents</field>
         <field name="res_model">loan.application.document</field>
         <field name="view_mode">list,form</field>
     </record>
 </odoo>
- 
