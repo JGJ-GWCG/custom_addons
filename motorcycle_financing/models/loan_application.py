@@ -130,3 +130,25 @@ class LoanModel(models.Model):
 
     def action_cancel(self):
         self.write({'state': 'cancel'})
+
+    def action_view_documents(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Documents',
+            'res_model': 'loan.application.document',
+            'view_mode': 'list,form',
+            'domain': [('application_id', '=', self.id)],
+            'context': {'default_application_id': self.id},
+        }
+ 
+    def action_view_documents_approved(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Approved Documents',
+            'res_model': 'loan.application.document',
+            'view_mode': 'list,form',
+            'domain': [('application_id', '=', self.id), ('state', '=', 'approved')],
+            'context': {'default_application_id': self.id},
+        }
