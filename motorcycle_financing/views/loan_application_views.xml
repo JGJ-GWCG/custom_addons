@@ -99,6 +99,7 @@
             <list decoration-danger="state == 'rejected'" decoration-success="state == 'approved'">
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="date_application"/>
                 <field name="loan_amount"/>
                 <field name="interest_rate"/>
